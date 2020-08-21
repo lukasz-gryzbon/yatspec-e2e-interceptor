@@ -1,7 +1,7 @@
-package com.something.config.interceptor;
+package com.something.interceptor;
 
-import com.something.config.captor.http.RequestCaptor;
-import com.something.config.captor.http.ResponseCaptor;
+import com.something.captor.http.RequestCaptor;
+import com.something.captor.http.ResponseCaptor;
 import feign.Logger;
 import feign.Request;
 import feign.Response;

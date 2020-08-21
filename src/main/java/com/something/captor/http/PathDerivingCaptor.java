@@ -1,4 +1,4 @@
-package com.something.config.captor.http;
+package com.something.captor.http;
 
 public abstract class PathDerivingCaptor {
     private static final String EXTRACT_PATH = "https?://.*?(/.*)";

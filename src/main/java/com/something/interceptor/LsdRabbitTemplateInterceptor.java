@@ -1,8 +1,8 @@
-package com.something.config.interceptor;
+package com.something.interceptor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.something.config.captor.rabbit.ConsumeCaptor;
-import com.something.config.captor.rabbit.PublishCaptor;
+import com.something.captor.rabbit.ConsumeCaptor;
+import com.something.captor.rabbit.PublishCaptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageBuilder;
@@ -28,7 +28,7 @@ public class LsdRabbitTemplateInterceptor {
         rabbitTemplate.addBeforePublishPostProcessors(message -> {
             try {
                 publishCaptor.capturePublishInteraction(MessageBuilder.fromMessage(message).build());
-            } catch (JsonProcessingException e) {
+            } catch (final JsonProcessingException e) {
                 log.error(e.getMessage(), e);
             }
             return message;
@@ -36,7 +36,7 @@ public class LsdRabbitTemplateInterceptor {
         rabbitTemplate.addAfterReceivePostProcessors(message -> {
             try {
                 consumeCaptor.captureConsumeInteraction(MessageBuilder.fromMessage(message).build());
-            } catch (JsonProcessingException e) {
+            } catch (final JsonProcessingException e) {
                 log.error(e.getMessage(), e);
             }
             return message;

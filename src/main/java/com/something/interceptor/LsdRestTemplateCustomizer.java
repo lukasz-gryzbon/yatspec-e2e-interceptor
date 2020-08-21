@@ -1,4 +1,4 @@
-package com.something.config.interceptor;
+package com.something.interceptor;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Value;

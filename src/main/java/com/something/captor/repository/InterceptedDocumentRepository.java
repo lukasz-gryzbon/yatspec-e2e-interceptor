@@ -1,4 +1,4 @@
-package com.something.config.captor.repository;
+package com.something.captor.repository;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -23,8 +23,8 @@ public class InterceptedDocumentRepository {
 
     private final MongoClient mongoClient;
 
-    public InterceptedDocumentRepository(@Value("${yatspec.lsd.db.connectionstring}") String dbConnectionString) {
-        ConnectionString connString = new ConnectionString(dbConnectionString);
+    public InterceptedDocumentRepository(@Value("${yatspec.lsd.db.connectionstring}") final String dbConnectionString) {
+        final ConnectionString connString = new ConnectionString(dbConnectionString);
         mongoClient = MongoClients.create(MongoClientSettings.builder()
                 .applyConnectionString(connString)
 //            .credential(credential)
@@ -42,9 +42,9 @@ public class InterceptedDocumentRepository {
 
 //    private final ConnectionString connString = new ConnectionString("mongodb://ctayl239-200724-50924.mdb-free-dev.svc.pd01svc.edc.caas.ford.com:27017");
 
-    public void save(Document interceptedCall) {
-        MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-        MongoCollection<Document> interceptedCalls = database.getCollection(COLLECTION_NAME);
+    public void save(final Document interceptedCall) {
+        final MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+        final MongoCollection<Document> interceptedCalls = database.getCollection(COLLECTION_NAME);
         interceptedCalls.insertOne(interceptedCall);
     }
 }

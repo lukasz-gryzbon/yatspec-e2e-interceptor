@@ -1,4 +1,4 @@
-package com.something.config.captor.http;
+package com.something.captor.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
