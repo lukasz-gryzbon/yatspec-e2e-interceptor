@@ -6,6 +6,7 @@ import com.yatspec.e2e.interceptor.LsdFeignLoggerInterceptor;
 import feign.Logger;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 // TODO Extract to a library
 @Configuration
 @RequiredArgsConstructor
-//@ConditionalOnProperty(name = "${yatspec.lsd.db.connectionstring}") // TODO Needs to be tested for missing value
+@ConditionalOnProperty(name = "yatspec.lsd.db.connectionstring") // TODO Needs to be tested for missing value
 @Slf4j
 @ComponentScan({"com.yatspec.e2e"})
 public class OutgoingInterceptorConfig {
