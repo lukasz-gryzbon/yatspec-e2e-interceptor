@@ -1,4 +1,4 @@
-package com.something.captor.http;
+package com.yatspec.e2e.captor.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

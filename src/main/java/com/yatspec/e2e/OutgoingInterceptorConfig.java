@@ -1,8 +1,8 @@
-package com.something;
+package com.yatspec.e2e;
 
-import com.something.captor.http.RequestCaptor;
-import com.something.captor.http.ResponseCaptor;
-import com.something.interceptor.LsdFeignLoggerInterceptor;
+import com.yatspec.e2e.captor.http.RequestCaptor;
+import com.yatspec.e2e.captor.http.ResponseCaptor;
+import com.yatspec.e2e.interceptor.LsdFeignLoggerInterceptor;
 import feign.Logger;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 //@ConditionalOnProperty(name = "${yatspec.lsd.db.connectionstring}") // TODO Needs to be tested for missing value
 @Slf4j
-@ComponentScan({"com.something"})
+@ComponentScan({"com.yatspec.e2e"})
 public class OutgoingInterceptorConfig {
 
     private final RequestCaptor requestCaptor;

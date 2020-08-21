@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.something.OutgoingInterceptorConfig
+  com.yatspec.e2e.OutgoingInterceptorConfig

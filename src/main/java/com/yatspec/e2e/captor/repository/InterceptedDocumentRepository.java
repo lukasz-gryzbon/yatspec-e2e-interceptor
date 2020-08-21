@@ -1,4 +1,4 @@
-package com.something.captor.repository;
+package com.yatspec.e2e.captor.repository;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;

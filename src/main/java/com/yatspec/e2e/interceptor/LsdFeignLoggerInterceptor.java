@@ -1,7 +1,7 @@
-package com.something.interceptor;
+package com.yatspec.e2e.interceptor;
 
-import com.something.captor.http.RequestCaptor;
-import com.something.captor.http.ResponseCaptor;
+import com.yatspec.e2e.captor.http.RequestCaptor;
+import com.yatspec.e2e.captor.http.ResponseCaptor;
 import feign.Logger;
 import feign.Request;
 import feign.Response;

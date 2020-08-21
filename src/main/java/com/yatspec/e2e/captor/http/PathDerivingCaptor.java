@@ -1,4 +1,4 @@
-package com.something.captor.http;
+package com.yatspec.e2e.captor.http;
 
 public abstract class PathDerivingCaptor {
     private static final String EXTRACT_PATH = "https?://.*?(/.*)";

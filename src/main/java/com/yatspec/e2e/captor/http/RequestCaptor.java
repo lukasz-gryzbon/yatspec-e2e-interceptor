@@ -1,12 +1,12 @@
-package com.something.captor.http;
+package com.yatspec.e2e.captor.http;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nickmcdowall.lsd.http.naming.DestinationNameMappings;
 import com.nickmcdowall.lsd.http.naming.RegexResolvingNameMapper;
 import com.nickmcdowall.lsd.http.naming.SourceNameMappings;
-import com.something.captor.repository.InterceptedDocumentRepository;
-import com.something.captor.repository.MapGenerator;
+import com.yatspec.e2e.captor.repository.InterceptedDocumentRepository;
+import com.yatspec.e2e.captor.repository.MapGenerator;
 import feign.Request;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
 import static com.nickmcdowall.lsd.http.common.HttpInteractionMessageTemplates.requestOf;
-import static com.something.captor.repository.Type.REQUEST;
+import static com.yatspec.e2e.captor.repository.Type.REQUEST;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Component

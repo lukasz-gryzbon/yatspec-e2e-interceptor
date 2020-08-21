@@ -1,4 +1,4 @@
-package com.something.interceptor;
+package com.yatspec.e2e.interceptor;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Value;

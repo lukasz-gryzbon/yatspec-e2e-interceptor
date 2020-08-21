@@ -1,8 +1,8 @@
-package com.something.interceptor;
+package com.yatspec.e2e.interceptor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.something.captor.rabbit.ConsumeCaptor;
-import com.something.captor.rabbit.PublishCaptor;
+import com.yatspec.e2e.captor.rabbit.ConsumeCaptor;
+import com.yatspec.e2e.captor.rabbit.PublishCaptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageBuilder;
