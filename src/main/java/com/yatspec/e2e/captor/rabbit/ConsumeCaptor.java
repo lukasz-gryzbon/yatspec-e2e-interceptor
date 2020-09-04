@@ -3,35 +3,46 @@ package com.yatspec.e2e.captor.rabbit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yatspec.e2e.captor.http.ObjectMapperCreator;
+import com.yatspec.e2e.captor.name.AppNameDeriver;
+import com.yatspec.e2e.captor.name.ExchangeNameDeriver;
+import com.yatspec.e2e.captor.rabbit.header.HeaderRetriever;
 import com.yatspec.e2e.captor.repository.InterceptedDocumentRepository;
 import com.yatspec.e2e.captor.repository.MapGenerator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
 import static com.yatspec.e2e.captor.repository.Type.CONSUME;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ConsumeCaptor {
 
     private final ObjectMapper objectMapper = new ObjectMapperCreator().getObjectMapper().enable(INDENT_OUTPUT);
 
     private final InterceptedDocumentRepository interceptedDocumentRepository;
     private final MapGenerator mapGenerator;
+    private final AppNameDeriver appNameDeriver;
+    private final ExchangeNameDeriver exchangeNameDeriver;
+    private final HeaderRetriever headerRetriever;
 
     public void captureConsumeInteraction(final Message message) throws JsonProcessingException {
-        final Map<String, Collection<String>> headers = message.getMessageProperties().getHeaders().entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> List.of(e.getValue().toString())));
-        final Map<String, Object> map = mapGenerator.generateFrom(new String(message.getBody()), headers, "consume message from Exchange to App", CONSUME);
+        final MessageProperties messageProperties = message.getMessageProperties();
+        final Map<String, Collection<String>> headers = headerRetriever.retrieve(messageProperties);
+        final Map<String, Object> map = mapGenerator.generateFrom(new String(message.getBody()), headers, buildInteractionName(messageProperties), CONSUME);
         final Document document = Document.parse(objectMapper.writeValueAsString(map));
         interceptedDocumentRepository.save(document);
+    }
+
+    private String buildInteractionName(final MessageProperties messageProperties) {
+        return "consume message from " + exchangeNameDeriver.derive(messageProperties) + " to " + appNameDeriver.derive();
     }
 }

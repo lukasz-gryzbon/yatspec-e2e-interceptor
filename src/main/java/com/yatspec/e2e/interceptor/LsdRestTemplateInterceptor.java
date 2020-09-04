@@ -20,7 +20,6 @@ public class LsdRestTemplateInterceptor implements ClientHttpRequestInterceptor 
     private final RequestCaptor requestCaptor;
     private final ResponseCaptor responseCaptor;
 
-    // TODO How do we make it conditional?
     @Override
     public ClientHttpResponse intercept(final HttpRequest request, final byte[] body, final ClientHttpRequestExecution execution) throws IOException {
         requestCaptor.captureRequestInteraction(request, new String(body));

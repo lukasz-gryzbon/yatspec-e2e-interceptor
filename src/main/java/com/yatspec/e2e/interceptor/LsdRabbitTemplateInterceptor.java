@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 
 @Slf4j
 @Configuration
-@Profile({"local", "docker"})
+@Profile({"local", "docker"}) // TODO Should we be doing this?
 @RequiredArgsConstructor
 public class LsdRabbitTemplateInterceptor {
 

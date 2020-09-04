@@ -23,6 +23,7 @@ jar {
 }
 
 repositories {
+    mavenLocal()
     jcenter()
 }
 
@@ -52,9 +53,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
     implementation 'org.mongodb:mongo-java-driver:3.12.6'
+
+    implementation 'com.github.nickmcdowall:yatspec:2020.1.13'
+
     implementation 'com.github.nickmcdowall:yatspec-lsd-interceptors:0.3.16'
     implementation 'org.apache.commons:commons-lang3:3.11'
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    implementation group: 'dom4j', name: 'dom4j', version: '1.6.1'
 }
