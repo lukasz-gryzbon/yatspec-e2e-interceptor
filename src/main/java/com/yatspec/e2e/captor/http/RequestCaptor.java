@@ -2,7 +2,7 @@ package com.yatspec.e2e.captor.http;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nickmcdowall.lsd.http.naming.DestinationNameMappings;
+import com.yatspec.e2e.captor.http.mapper.DestinationNameMappings;
 import com.yatspec.e2e.captor.name.AppNameDeriver;
 import com.yatspec.e2e.captor.repository.InterceptedDocumentRepository;
 import com.yatspec.e2e.captor.repository.MapGenerator;
@@ -20,8 +20,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
-import static com.nickmcdowall.lsd.http.common.HttpInteractionMessageTemplates.requestOf;
-import static com.nickmcdowall.lsd.http.naming.UserSuppliedDestinationMappings.userSuppliedDestinationMappings;
+import static com.yatspec.e2e.captor.http.mapper.UserSuppliedDestinationMappings.userSuppliedDestinationMappings;
+import static com.yatspec.e2e.captor.http.template.HttpInteractionMessageTemplates.requestOf;
 import static com.yatspec.e2e.captor.repository.Type.REQUEST;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -58,7 +58,7 @@ public class RequestCaptor extends PathDerivingCaptor {
     // TODO This should be moved to the E2E tests
     private DestinationNameMappings destinationNameMapping() {
         return userSuppliedDestinationMappings(Map.of(
-                "/consumer-orders", "ConsumerOrderService"
+                "/consumer-orders", "ConsumerOrder"
         ));
     }
 

@@ -13,6 +13,6 @@ public class ExchangeNameDeriver {
     public String derive(final MessageProperties messageProperties)  {
         return Arrays.stream(messageProperties.getHeader(TYPE_ID_HEADER).toString().split("\\."))
                 .reduce((first, second) -> second)
-                .orElse(null) + "Exchange";
+                .orElse(null);
     }
 }

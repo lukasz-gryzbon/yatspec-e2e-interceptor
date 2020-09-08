@@ -10,6 +10,6 @@ public class AppNameDeriver {
     private String appName;
 
     public String derive()  {
-        return appName.replaceAll(" ", "");
+        return appName.replaceAll(" Service", "").replaceAll(" ", "");
     }
 }

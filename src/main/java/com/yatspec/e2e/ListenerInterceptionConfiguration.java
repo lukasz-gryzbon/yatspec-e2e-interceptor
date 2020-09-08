@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
+/*
+    This config adds the interception of messages to RabbitMq listeners
+*/
 @ConditionalOnProperty(name = {"yatspec.lsd.db.connectionstring"})
 @ConditionalOnBean(SimpleRabbitListenerContainerFactory.class)
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
-/*
-    This config add the interception of messages to RabbitMq listeners
- */
 public class ListenerInterceptionConfiguration {
 
     private final SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory;
