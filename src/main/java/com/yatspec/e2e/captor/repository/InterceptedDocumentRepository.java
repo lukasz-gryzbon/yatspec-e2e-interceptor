@@ -8,14 +8,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /*
     We can consider providing other repositories (eg. InterceptedRelationalRepository) based on the connection string
 */
 @Slf4j
-@Component
 public class InterceptedDocumentRepository {
 
     private static final String DATABASE_NAME = "goms"; // TODO Should we assume the db exists? Or should we attempt to create it if it doesn't?
@@ -23,7 +20,7 @@ public class InterceptedDocumentRepository {
 
     private final MongoClient mongoClient;
 
-    public InterceptedDocumentRepository(@Value("${yatspec.lsd.db.connectionstring}") final String dbConnectionString) {
+    public InterceptedDocumentRepository(final String dbConnectionString) {
         final ConnectionString connString = new ConnectionString(dbConnectionString);
         mongoClient = MongoClients.create(MongoClientSettings.builder()
                 .applyConnectionString(connString)

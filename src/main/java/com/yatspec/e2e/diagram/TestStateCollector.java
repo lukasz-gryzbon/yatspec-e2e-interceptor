@@ -12,8 +12,6 @@ import org.bson.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.XMLWriter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -22,15 +20,15 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class TestStateCollector {
 
-    private static final String DATABASE_NAME = "goms"; // TODO Should we assume the db exists? Or should we attempt to create it if it doesn't?
+    private static final String DATABASE_NAME = "goms";
     private static final String COLLECTION_NAME = "interceptedInteraction";
 
-    @Autowired
-    private TestState testState;
+    private final TestState testState;
 
     private final MongoClient mongoClient;
 
-    public TestStateCollector(@Value("${yatspec.lsd.db.connectionstring}") final String dbConnectionString) {
+    public TestStateCollector(final String dbConnectionString, final TestState testState) {
+        this.testState = testState;
         final ConnectionString connString = new ConnectionString(dbConnectionString);
         mongoClient = MongoClients.create(MongoClientSettings.builder()
                 .applyConnectionString(connString)

@@ -1,11 +1,9 @@
 package com.yatspec.e2e.captor.name;
 
 import org.springframework.amqp.core.MessageProperties;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-@Component
 public class ExchangeNameDeriver {
 
     private static final String TYPE_ID_HEADER = "__TypeId__";

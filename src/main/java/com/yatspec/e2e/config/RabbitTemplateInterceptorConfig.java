@@ -1,4 +1,4 @@
-package com.yatspec.e2e.interceptor;
+package com.yatspec.e2e.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yatspec.e2e.captor.rabbit.ConsumeCaptor;
@@ -7,22 +7,21 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
 
 @Slf4j
 @Configuration
-@Profile({"local", "docker"}) // TODO Should we be doing this?
+@ConditionalOnProperty(name = {"yatspec.lsd.db.connectionstring"})
 @RequiredArgsConstructor
-public class LsdRabbitTemplateInterceptor {
+public class RabbitTemplateInterceptorConfig {
 
     private final RabbitTemplate rabbitTemplate;
     private final PublishCaptor publishCaptor;
     private final ConsumeCaptor consumeCaptor;
 
-    // TODO How do we make it conditional?
     @PostConstruct
     public void configureRabbitTemplatePublishInterceptor() {
         rabbitTemplate.addBeforePublishPostProcessors(message -> {

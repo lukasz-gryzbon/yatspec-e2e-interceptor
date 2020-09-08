@@ -1,9 +1,8 @@
-package com.yatspec.e2e;
+package com.yatspec.e2e.config;
 
 import com.yatspec.e2e.captor.rabbit.ConsumeCaptor;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -20,8 +19,7 @@ import javax.annotation.PostConstruct;
 @ConditionalOnBean(SimpleRabbitListenerContainerFactory.class)
 @Configuration
 @RequiredArgsConstructor
-@Slf4j
-public class ListenerInterceptionConfiguration {
+public class RabbitListenerInterceptorConfig {
 
     private final SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory;
     private final ConsumeCaptor consumeCaptor;

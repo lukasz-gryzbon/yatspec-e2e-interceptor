@@ -2,7 +2,7 @@ package com.yatspec.e2e.captor.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yatspec.e2e.captor.http.mapper.DestinationNameMappings;
-import com.yatspec.e2e.captor.name.AppNameDeriver;
+import com.yatspec.e2e.captor.name.ServiceNameDeriver;
 import com.yatspec.e2e.captor.repository.InterceptedDocumentRepository;
 import com.yatspec.e2e.captor.repository.MapGenerator;
 import feign.Response;
@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -29,7 +28,6 @@ import static com.yatspec.e2e.captor.http.template.HttpInteractionMessageTemplat
 import static com.yatspec.e2e.captor.repository.Type.RESPONSE;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-@Component
 @RequiredArgsConstructor
 @Slf4j
 public class ResponseCaptor extends PathDerivingCaptor {
@@ -38,15 +36,14 @@ public class ResponseCaptor extends PathDerivingCaptor {
 
     private final InterceptedDocumentRepository interceptedDocumentRepository;
     private final MapGenerator mapGenerator;
-    private final AppNameDeriver appNameDeriver;
+    private final ServiceNameDeriver serviceNameDeriver;
 
     @SneakyThrows
     public Map<String, Object> captureResponseInteraction(final Response response) {
         try {
             final String path = derivePath(response.request().url());
-            final String source = appNameDeriver.derive();
+            final String source = serviceNameDeriver.derive();
             final String destination = destinationNameMapping().mapForPath(path);
-            log.info("YATSPEC-E2E: response capture - source:{}, destination:{}", source, destination);
             final String interactionMessage = responseOf(deriveStatus(response.status()), destination, source);
             final Map<String, Object> data = mapGenerator.generateFrom(extractResponseBodyToString(response), response.headers(), interactionMessage, RESPONSE);
             interceptedDocumentRepository.save(Document.parse(objectMapper.writeValueAsString(data)));
@@ -66,7 +63,7 @@ public class ResponseCaptor extends PathDerivingCaptor {
 
     public void captureResponseInteraction(final ClientHttpResponse response, final String path) throws IOException {
         final String body = copyBodyToString(response);
-        final String source = appNameDeriver.derive();
+        final String source = serviceNameDeriver.derive();
         final String destination = destinationNameMapping().mapForPath(path);
         final String interactionMessage = responseOf(response.getStatusCode().toString(), destination, source);
         final var headers = response.getHeaders().entrySet().stream()
