@@ -3,8 +3,8 @@ package com.yatspec.e2e.config;
 import com.googlecode.yatspec.state.givenwhenthen.TestState;
 import com.yatspec.e2e.captor.http.RequestCaptor;
 import com.yatspec.e2e.captor.http.ResponseCaptor;
-import com.yatspec.e2e.interceptor.CustomRestTemplateCustomizer;
 import com.yatspec.e2e.interceptor.LsdFeignLoggerInterceptor;
+import com.yatspec.e2e.interceptor.LsdRestTemplateCustomizer;
 import com.yatspec.e2e.interceptor.LsdRestTemplateInterceptor;
 import feign.Logger;
 import lombok.RequiredArgsConstructor;
@@ -41,12 +41,12 @@ public class HttpInterceptorConfig {
     }
 
     @Bean
-    public ClientHttpRequestInterceptor restTemplateInterceptor(final RequestCaptor requestCaptor, final ResponseCaptor responseCaptor) {
+    public ClientHttpRequestInterceptor lsdRestTemplateInterceptor(final RequestCaptor requestCaptor, final ResponseCaptor responseCaptor) {
         return new LsdRestTemplateInterceptor(requestCaptor, responseCaptor);
     }
 
     @Bean
-    public CustomRestTemplateCustomizer restTemplateCustomizer(final ClientHttpRequestInterceptor lsdRestTemplateInterceptor) {
-        return new CustomRestTemplateCustomizer(lsdRestTemplateInterceptor);
+    public LsdRestTemplateCustomizer lsdRestTemplateCustomizer(final ClientHttpRequestInterceptor lsdRestTemplateInterceptor) {
+        return new LsdRestTemplateCustomizer(lsdRestTemplateInterceptor);
     }
 }

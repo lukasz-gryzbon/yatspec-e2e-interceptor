@@ -12,7 +12,7 @@ import java.util.List;
 
 @Value
 @RequiredArgsConstructor
-public class CustomRestTemplateCustomizer implements RestTemplateCustomizer {
+public class LsdRestTemplateCustomizer implements RestTemplateCustomizer {
 
     ClientHttpRequestInterceptor interceptor;
 
